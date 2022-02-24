@@ -100,6 +100,20 @@ Material LoadPBRMaterial(const char *albedo_path,
     return mat;
 }
 
+void SetupPBRMaterial(Material* mat, TextureFilter filter_mode) {
+    SetTextureFilter(mat->maps[MATERIAL_MAP_ALBEDO].texture, filter_mode);
+    SetTextureFilter(mat->maps[MATERIAL_MAP_NORMAL].texture, filter_mode);
+    SetTextureFilter(mat->maps[MATERIAL_MAP_METALNESS].texture, filter_mode);
+    SetTextureFilter(mat->maps[MATERIAL_MAP_ROUGHNESS].texture, filter_mode);
+    SetTextureFilter(mat->maps[MATERIAL_MAP_OCCLUSION].texture, filter_mode);
+
+    GenTextureMipmaps(&mat->maps[MATERIAL_MAP_ALBEDO].texture);
+    GenTextureMipmaps(&mat->maps[MATERIAL_MAP_NORMAL].texture);
+    GenTextureMipmaps(&mat->maps[MATERIAL_MAP_METALNESS].texture);
+    GenTextureMipmaps(&mat->maps[MATERIAL_MAP_ROUGHNESS].texture);
+    GenTextureMipmaps(&mat->maps[MATERIAL_MAP_OCCLUSION].texture);
+}
+
 void MakeMaterialPBR(Material *mat) {
     mat->shader = pbr_shader;
 }

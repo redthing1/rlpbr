@@ -18,19 +18,22 @@ int main() {
     SetTargetFPS(60);
 
     Camera3D cam = {
-        .position = (Vector3) {1.5f, 1.5f, 1.5f}, .target = (Vector3) {0, 0.75f, 0}, .up = (Vector3) {
+        .position = (Vector3) {1.5f, 1.5f, 1.5f}, .target = (Vector3) {0, 1.0f, 0}, .up = (Vector3) {
             0, 1, 0
         }, .fovy = 90, .projection = CAMERA_PERSPECTIVE
     };
     SetCameraMode(cam, CAMERA_ORBITAL);
 
-    Model helmet = LoadModel("pbr/model/trooper.obj");
-    helmet.materials[0] = LoadPBRMaterial("pbr/model/trooper_albedo.png",
-                                          "pbr/model/trooper_ao.png",
-                                          "pbr/model/trooper_metalness.png",
-                                          "pbr/model/trooper_normals.png",
-                                          "pbr/model/trooper_roughness.png",
-                                          TEXTURE_FILTER_ANISOTROPIC_16X);
+    Model helmet = LoadModel("pbr/model/damagedhelmet.glb");
+    // helmet.materials[0] = LoadPBRMaterial("pbr/model/trooper_albedo.png",
+    //                                       "pbr/model/trooper_ao.png",
+    //                                       "pbr/model/trooper_metalness.png",
+    //                                       "pbr/model/trooper_normals.png",
+    //                                       "pbr/model/trooper_roughness.png",
+    //                                       TEXTURE_FILTER_ANISOTROPIC_16X);
+
+    SetupPBRMaterial(&helmet.materials[0], TEXTURE_FILTER_ANISOTROPIC_16X);
+    MakeMaterialPBR(&helmet.materials[0]);
 
     Model floor = LoadModelFromMesh(GenMeshPlane(10, 10, 1, 1));
     floor.materials[0] = LoadPBRMaterial(0, 0, 0, 0, 0, TEXTURE_FILTER_POINT);
@@ -58,7 +61,7 @@ int main() {
         UpdatePBR(cam);
 
         DrawModel(floor, (Vector3) {0, 0, 0}, 1, WHITE);
-        DrawModel(helmet, (Vector3) {0, 0, 0}, 1, WHITE);
+        DrawModel(helmet, (Vector3) {0, 0.75, 0}, 1, WHITE);
         DrawGrid(10, 1);
 
         EndMode3D();

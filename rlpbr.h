@@ -46,6 +46,8 @@ Material LoadPBRMaterial(const char *albedo_path,
                          const char *normals_path,
                          const char *roughness_path,
                          TextureFilter filter_mode);
+void SetupPBRMaterial(Material* mat, TextureFilter filter_mode);
+
 // Apply PBR shader to material without changing its textures
 void MakeMaterialPBR(Material *mat);
 
