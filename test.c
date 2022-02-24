@@ -25,15 +25,22 @@ int main() {
     SetCameraMode(cam, CAMERA_ORBITAL);
 
     Model helmet = LoadModel("pbr/model/damagedhelmet.glb");
+    helmet.materials[0] = LoadPBRMaterial("pbr/model/dh_albedo.png",
+                                          "pbr/model/dh_ao.png",
+                                          "pbr/model/dh_metalness.png",
+                                          "pbr/model/dh_normals.png",
+                                          "pbr/model/dh_roughness.png",
+                                          TEXTURE_FILTER_ANISOTROPIC_16X);
+    // SetupPBRMaterial(&helmet.materials[0], TEXTURE_FILTER_ANISOTROPIC_16X);
+    // MakeMaterialPBR(&helmet.materials[0]);
+// 
+    // Model helmet = LoadModel("pbr/model/trooper.obj");
     // helmet.materials[0] = LoadPBRMaterial("pbr/model/trooper_albedo.png",
     //                                       "pbr/model/trooper_ao.png",
     //                                       "pbr/model/trooper_metalness.png",
     //                                       "pbr/model/trooper_normals.png",
     //                                       "pbr/model/trooper_roughness.png",
     //                                       TEXTURE_FILTER_ANISOTROPIC_16X);
-
-    SetupPBRMaterial(&helmet.materials[0], TEXTURE_FILTER_ANISOTROPIC_16X);
-    MakeMaterialPBR(&helmet.materials[0]);
 
     Model floor = LoadModelFromMesh(GenMeshPlane(10, 10, 1, 1));
     floor.materials[0] = LoadPBRMaterial(0, 0, 0, 0, 0, TEXTURE_FILTER_POINT);
