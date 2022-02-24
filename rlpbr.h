@@ -21,7 +21,7 @@
 extern "C" {
 #endif
 
-typedef enum LightType : int {
+typedef enum LightType {
     POINT = 1, SPOT = 2, SUN = 3
 } LightType;
 
